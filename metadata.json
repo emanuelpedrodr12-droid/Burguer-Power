@@ -1,0 +1,6 @@
+{
+  "name": "Burguer Power - Cardápio Digital & Pedidos",
+  "description": "Cardápio digital moderno da Hamburgueria Burguer Power com pedidos em tempo real, carrinho inteligente e envio direto para WhatsApp.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

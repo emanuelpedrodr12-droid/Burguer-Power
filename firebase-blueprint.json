@@ -1,0 +1,74 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile with contact info and preferences",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 256 },
+        "displayName": { "type": "string", "maxLength": 120 },
+        "phone": { "type": "string", "maxLength": 30 },
+        "address": { "type": "string", "maxLength": 300 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["uid", "email"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer burger orders placed in Burguer Power",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "customerName": { "type": "string", "maxLength": 120 },
+        "customerPhone": { "type": "string", "maxLength": 30 },
+        "deliveryType": { "type": "string", "enum": ["delivery", "retirada"] },
+        "address": { "type": "string", "maxLength": 300 },
+        "paymentMethod": { "type": "string", "enum": ["pix", "cartao", "dinheiro"] },
+        "changeFor": { "type": "string", "maxLength": 50 },
+        "items": { "type": "array" },
+        "subtotal": { "type": "number" },
+        "deliveryFee": { "type": "number" },
+        "total": { "type": "number" },
+        "status": { "type": "string", "enum": ["recebido", "em_preparo", "saiu_entrega", "concluido", "cancelado"] },
+        "notes": { "type": "string", "maxLength": 500 },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["userId", "customerName", "customerPhone", "deliveryType", "paymentMethod", "items", "total", "status"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Menu items for Burguer Power",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 120 },
+        "description": { "type": "string", "maxLength": 500 },
+        "price": { "type": "number" },
+        "category": { "type": "string", "maxLength": 60 },
+        "imageUrl": { "type": "string", "maxLength": 1000 },
+        "available": { "type": "boolean" },
+        "rating": { "type": "number" },
+        "tags": { "type": "array" },
+        "isPopular": { "type": "boolean" }
+      },
+      "required": ["title", "price", "category", "imageUrl"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "#UserProfile",
+      "description": "User profile records containing personal contact and delivery details"
+    },
+    "/orders/{orderId}": {
+      "schema": "#Order",
+      "description": "Customer orders stored in real-time"
+    },
+    "/products/{productId}": {
+      "schema": "#Product",
+      "description": "Burger menu catalog available to all customers"
+    }
+  }
+}
